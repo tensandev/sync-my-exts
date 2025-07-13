@@ -1,0 +1,108 @@
+{
+  "name": "sync-my-exts",
+  "displayName": "Sync My Extensions",
+  "description": "VS Code拡張機能一覧をGitHubアカウントを通じて簡単に共有する拡張機能",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:sync-my-exts.syncExtensions",
+    "onCommand:sync-my-exts.importExtensions"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "syncMyExtsViewContainer",
+          "title": "Sync My Exts",
+          "icon": "resources/sync.svg"
+        }
+      ]
+    },
+    "views": {
+      "syncMyExtsViewContainer": [
+        {
+          "id": "syncMyExtsView",
+          "name": "拡張機能・設定同期"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "sync-my-exts.syncExtensions",
+        "title": "拡張機能一覧をGitHubに同期",
+        "category": "Sync My Exts"
+      },
+      {
+        "command": "sync-my-exts.importExtensions",
+        "title": "GitHubから拡張機能一覧をインポート",
+        "category": "Sync My Exts"
+      },
+      {
+        "command": "sync-my-exts.syncSettings",
+        "title": "ユーザー設定をGitHubに同期",
+        "category": "Sync My Exts"
+      },
+      {
+        "command": "sync-my-exts.importSettings",
+        "title": "GitHubからユーザー設定をインポート",
+        "category": "Sync My Exts"
+      },
+      {
+        "command": "sync-my-exts.loginToGitHub",
+        "title": "GitHubにログイン",
+        "category": "Sync My Exts"
+      },
+      {
+        "command": "sync-my-exts.logoutFromGitHub",
+        "title": "GitHubからログアウト",
+        "category": "Sync My Exts"
+      }
+    ],
+    "configuration": {
+      "title": "Sync My Extensions",
+      "properties": {
+        "syncMyExts.clientId": {
+          "type": "string",
+          "default": "",
+          "description": "GitHub OAuth AppのClient ID"
+        },
+        "syncMyExts.clientSecret": {
+          "type": "string",
+          "default": "",
+          "description": "GitHub OAuth AppのClient Secret"
+        },
+        "syncMyExts.repository": {
+          "type": "string",
+          "default": "",
+          "description": "GitHubリポジトリ名 (例: username/repo-name)"
+        },
+        "syncMyExts.fileName": {
+          "type": "string",
+          "default": "extensions.json",
+          "description": "拡張機能一覧を保存するファイル名"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "16.x",
+    "@types/simple-oauth2": "^5.0.7",
+    "@types/vscode": "^1.74.0",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "simple-oauth2": "^5.0.0"
+  }
+}
